@@ -1,0 +1,8 @@
+prefix=/home/vini/catkin_ws/devel
+
+Name: turtlebot3_pose
+Description: Description of turtlebot3_pose
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Gripper -->
+  <joint name="left_gripper_joint" type="revolute">
+    <parent link="top_link"/>
+    <child link="left_gripper"/>
+    <origin xyz="0 0 ${height2 - axle_offset}" rpy="0 -1.57 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="30.0" lower="-0.548" upper="-0.1" velocity="0.1"/>
+  </joint>
+
+  <link name="left_gripper">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rrbot/meshes/l_finger.dae" scale="0.5 0.2 0.2"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial z_value="0" i_value="1e-6" mass="0.05"/>
+  </link>
+
+  <joint name="right_gripper_joint" type="revolute">
+    <parent link="top_link"/>
+    <child link="right_gripper"/>
+    <origin xyz="0 0 ${height2 - axle_offset}" rpy="0 -1.57 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="30.0" lower="-0.548" upper="-0.1" velocity="0.1"/>
+  </joint>
+
+  <link name="right_gripper">
+    <visual>
+      <origin rpy="3.1415 0 0" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://rrbot/meshes/l_finger.dae" scale="0.5 0.2 0.2"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin rpy="0 0 0" xyz="0.01 -0.001 0"/>
+      <geometry>
+        <box size="0.05 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <xacro:default_inertial z_value="0" i_value="1e-6" mass="0.05"/>
+  </link>
+
+   
+  <transmission name="gripper_transmission1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="left_gripper_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_motor1">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="gripper_transmission2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="right_gripper_joint">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="gripper_motor2">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+</robot>

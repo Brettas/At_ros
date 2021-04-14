@@ -1,0 +1,8 @@
+prefix=/home/vini/catkin_ws/install
+
+Name: turtlebot3_image
+Description: Description of turtlebot3_image
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
